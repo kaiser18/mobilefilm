@@ -12,6 +12,7 @@ import {
 import { useRouter } from "expo-router";
 import { fetchFilms } from "@/services/api";
 import useFetch from "@/services/useFetch";
+import FilmCard from "@/components/FilmCard";
 
 export default function Index() {
   const router = useRouter();
@@ -53,9 +54,7 @@ export default function Index() {
 
               <FlatList
                 data={films}
-                renderItem={({ item }) => (
-                  <Text className="text-white text-sm">{item.title}</Text>
-                )}
+                renderItem={({ item }) => <FilmCard {...item} />}
                 keyExtractor={(item) => item.id}
                 numColumns={3}
                 columnWrapperStyle={{
