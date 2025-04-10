@@ -24,10 +24,6 @@ const Search = () => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadFilms();
-
-        if (films?.length > 0 && films?.[0]) {
-          await updateSearchCount(searchQuery, films[0]);
-        }
       } else {
         reset();
       }
@@ -35,6 +31,12 @@ const Search = () => {
 
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (films?.length > 0 && films?.[0]) {
+      updateSearchCount(searchQuery, films[0]);
+    }
+  }, [films]);
 
   return (
     <View className="flex-1 bg-primary">

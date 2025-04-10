@@ -1,4 +1,4 @@
-interface Film{
+interface Film {
   id: number;
   title: string;
   adult: boolean;
@@ -17,7 +17,7 @@ interface Film{
 
 interface TrendingFilm {
   searchTerm: string;
-  movie_id: number;
+  film_id: number;
   title: string;
   count: number;
   poster_url: string;
@@ -72,6 +72,6 @@ interface FilmDetails {
 }
 
 interface TrendingCardProps {
-  movie: TrendingFilm;
+  film: TrendingFilm;
   index: number;
 }

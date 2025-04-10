@@ -39,3 +39,19 @@ export const updateSearchCount = async (query: string, film: Film) => {
     throw error;
   }
 };
+
+export const getTrendingFilms = async (): Promise<
+  TrendingFilm[] | undefined
+> => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.limit(5),
+      Query.orderDesc("count"),
+    ]);
+
+    return result.documents as unknown as TrendingFilm[];
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
