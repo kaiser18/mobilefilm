@@ -7,12 +7,13 @@ import { fetchFilms } from "@/services/api";
 
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/SearchBar";
+import { updateSearchCount } from "@/services/appwrite";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const {
-    data: films,
+    data: films = [],
     loading: filmsLoading,
     error: filmsError,
     refetch: loadFilms,
@@ -23,6 +24,10 @@ const Search = () => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadFilms();
+
+        if (films?.length > 0 && films?.[0]) {
+          await updateSearchCount(searchQuery, films[0]);
+        }
       } else {
         reset();
       }
